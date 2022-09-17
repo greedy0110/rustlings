@@ -14,8 +14,6 @@
 
 // Execute `rustlings hint hashmaps3` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
-
 use std::collections::HashMap;
 
 // A structure to store team name and its goal details.
@@ -35,11 +33,25 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         let team_1_score: u8 = v[2].parse().unwrap();
         let team_2_name = v[1].to_string();
         let team_2_score: u8 = v[3].parse().unwrap();
-        // TODO: Populate the scores table with details extracted from the
-        // current line. Keep in mind that goals scored by team_1
-        // will be number of goals conceded from team_2, and similarly
-        // goals scored by team_2 will be the number of goals conceded by
-        // team_1.
+
+        // fn record(name: &String, score: u8, concede: u8) {
+        let mut record = |name: String, score: u8, concede: u8| {
+            // 🤔 외부 스코프의 scores를 어떻게 참조할 것인가? => closure를 사용해서 참조한다.
+            //️ 🙋‍♂️ closure 학습 필요
+            let mut team = scores.entry(name.to_owned())
+                .or_insert(Team {
+                    name,
+                    goals_scored: 0,
+                    goals_conceded: 0,
+                });
+            
+            // 🤔 private 필드에 어떻게 값을 추가할 것인가?
+            team.goals_scored += score;
+            team.goals_conceded += concede;
+        };
+
+        record(team_1_name, team_1_score, team_2_score);
+        record(team_2_name, team_2_score, team_1_score);
     }
     scores
 }

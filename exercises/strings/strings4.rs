@@ -6,8 +6,6 @@
 // before the parentheses on each line. If you're right, it will compile!
 // No hints this time!
 
-// I AM NOT DONE
-
 fn string_slice(arg: &str) {
     println!("{}", arg);
 }
@@ -16,14 +14,20 @@ fn string(arg: String) {
 }
 
 fn main() {
-    ???("blue");
-    ???("red".to_string());
-    ???(String::from("hi"));
-    ???("rust is fun!".to_owned());
-    ???("nice weather".into());
-    ???(format!("Interpolation {}", "Station"));
-    ???(&String::from("abc")[0..1]);
-    ???("  hello there ".trim());
-    ???("Happy Monday!".to_string().replace("Mon", "Tues"));
-    ???("mY sHiFt KeY iS sTiCkY".to_lowercase());
+    string_slice("blue");
+    string("red".to_string());
+    string(String::from("hi"));
+
+    string("rust is fun!".to_owned()); // str의 Owned타입인 String으루
+
+    string("nice weather".into()); // From 호출이랑 같나봄? 그래서 상관 없나본데? string, string_slice
+    string_slice("nice weather".into()); // From 호출이랑 같나봄? 그래서 상관 없나본데? string, string_slice
+
+    string(format!("Interpolation {}", "Station"));
+
+    string_slice(&String::from("abc")[0..1]);
+    
+    string_slice("  hello there ".trim());
+    string("Happy Monday!".to_string().replace("Mon", "Tues"));
+    string("mY sHiFt KeY iS sTiCkY".to_lowercase());
 }
